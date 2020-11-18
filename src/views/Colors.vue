@@ -8,9 +8,9 @@
               flex-column 
               justify-content-between 
               my-1">
-      <div class="align-self-start mt-1 ml-2" >{{ color.year }}</div>
-       <h1>¡COPIADO!</h1>
-    <div class="align-self-end mb-1 mr-2">{{ color.pantone_value}}</div> 
+      <div class="align-self-start mt-1 ml-2" style="font-size :18pt" >{{ color.year }}</div>
+       <h1 class="font-weight-bold" style="font-size: 50pt;">¡Copiado!</h1>
+    <div class="align-self-end mb-1 mr-2" style="font-size :18pt">{{ color.pantone_value}}</div> 
     </div>
 
     <color-list v-else :key= "currentPage" :currentPage = "currentPage" @total-pages ="getTotalPages" @confirm-copy ="confirmCopy" />
@@ -111,7 +111,7 @@ export default {
   }
 
   #title, #pag{
-
+    font-size: 18pt;
     border: 1.5px solid #000000;
     border-radius: 7px;
     height: 35px;

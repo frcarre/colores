@@ -76,6 +76,11 @@ export default {
   flex: 0 0 33%;
 
 }
+
+p{
+  font-size:20pt; 
+}
+
 .color-card{
   border: 1px solid #000000;
   background-color: #dddddd;
