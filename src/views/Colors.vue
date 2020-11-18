@@ -1,10 +1,13 @@
 <template>
   <div id ="colors" class="d-flex flex-column justify-content-between">
-    <header id="title" > {{title}} </header>
+    <header id="title" class="d-flex align-items-center justify-content-center" > {{title}}</header>
 
-    <color-list/>
+    <color-list :page = "page"/>
 
-    <footer id="pag"> ANTERIOR - SIGUIENTE</footer>
+    <footer id="pag" class="d-flex align-items-center justify-content-between"> 
+      <button type="button" class="btn btn-link"> {{ prev }} </button>
+      <button type="button" class="btn btn-link">{{next}} </button>
+    </footer>
   </div>
 </template>
 
@@ -19,16 +22,21 @@ export default {
   },
   data(){
     return{
-      title: "COLORES"
+      title: "Colores",
+      prev:"< ANTERIOR",
+      next:"SIGUIENTE >",
+      page: 2
     }
   }
 }
 </script>
 
-<style scoped>
+<style>
   #title, #pag{
+
     border: 1.5px solid #000000;
     border-radius: 7px;
+    height: 35px;
   }
 
   #colors{

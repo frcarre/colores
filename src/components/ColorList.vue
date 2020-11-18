@@ -1,22 +1,28 @@
 <template>
   <div id="color-list" class="d-flex flex-wrap justify-content-between">
-    <div v-for="color in colors" :key="color.id" class="d-flex flex-column card">
-      <div>{{ color.year }}</div>
-      <div>{{ color.name }}</div>
-      <div>{{ color.color }}</div>
-      <div>{{ color.pantone_value}}</div>
-
+      <div v-for="color in colors" :key="color.id" 
+        class="d-flex 
+              flex-column 
+              justify-content-between 
+              color-card my-1">
+        <div class="align-self-start" >{{ color.year }}</div>
+        <div>
+          <p>{{ color.name }}</p>
+          <p> {{ color.color }} </p>
+        </div>
+        <div class="align-self-end">{{ color.pantone_value}}</div>
+      </div>
     </div>
-  </div>
+  
 </template>
-
+  
 <script>
 import axios from "axios";
 export default {
   name: "ColorList",
+  props:["page"],
   data() {
     return {
-      page: 2,
       page_prefix: "?page=",
       colors: []
     };
@@ -24,7 +30,9 @@ export default {
   methods: {
     getColors: function() {
       const path =
-        "https://reqres.in/api/colors" + this.page_prefix + this.page;
+        "https://reqres.in/api/colors" + (this.page == 1 ? "" : this.page_prefix + this.page );
+
+      console.log(path)
       axios
         .get(path)
         .then(response => {
@@ -42,8 +50,14 @@ export default {
 </script>
 
 <style>
-.card{
-  
+#color-list{
+  height: 100%;
+}
+#color-list > *{
+  flex: 0 0 33%;
+
+}
+.color-card{
   border: 1px solid #000000;
   background-color: #dddddd;
   border-radius:  10px;
