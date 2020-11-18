@@ -5,12 +5,12 @@
               flex-column 
               justify-content-between 
               color-card my-1">
-        <div class="align-self-start" >{{ color.year }}</div>
+        <div class="align-self-start mt-1 ml-2" >{{ color.year }}</div>
         <div>
-          <p>{{ color.name }}</p>
-          <p> {{ color.color }} </p>
+          <p class="m-0">{{ color.name }}</p>
+          <p class="font-weight-bold"> {{ color.color }} </p>
         </div>
-        <div class="align-self-end">{{ color.pantone_value}}</div>
+        <div class="align-self-end mb-1 mr-2">{{ color.pantone_value}}</div>
       </div>
     </div>
   
@@ -20,23 +20,23 @@
 import axios from "axios";
 export default {
   name: "ColorList",
-  props:["page"],
+  props:["currentPage"],
   data() {
     return {
       page_prefix: "?page=",
-      colors: []
+      colors: [],
+      totalPages:0,
     };
   },
   methods: {
     getColors: function() {
       const path =
-        "https://reqres.in/api/colors" + (this.page == 1 ? "" : this.page_prefix + this.page );
-
-      console.log(path)
+        "https://reqres.in/api/colors" + (this.currentPage == 1 ? "" : this.page_prefix + this.currentPage );
       axios
         .get(path)
         .then(response => {
           this.colors = response.data.data;
+          this.totalPages = response.data.total_pages;
         })
         .catch(error => {
           console.log(error);
@@ -45,6 +45,11 @@ export default {
   },
   created: function() {
     this.getColors();
+  },
+  watch:{
+    totalPages:function(){
+      this.$emit("total-pages", this.totalPages)
+    }
   }
 };
 </script>
