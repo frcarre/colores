@@ -1,6 +1,6 @@
 <template>
   <div id="color-list" class="d-flex flex-wrap justify-content-between">
-      <div @click="copyToClipboard(color.color), showConfirmation" v-for="color in colors" :key="color.id" 
+      <div @click="copyToClipboard(color)" v-for="color in colors" :key="color.id" 
         class="d-flex 
               flex-column 
               justify-content-between 
@@ -48,11 +48,13 @@ export default {
       document.body.appendChild(dummyInput);
 
       dummyInput.setAttribute("id", "dummy-input")
-      document.getElementById("dummy-input").value = color
+      document.getElementById("dummy-input").value = color.color
       dummyInput.select();
       document.execCommand("copy");
       document.body.removeChild(dummyInput);
-    }
+      this.$emit("confirm-copy", color);
+
+    },
     
   },
   created: function() {
